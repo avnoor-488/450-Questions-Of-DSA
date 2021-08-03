@@ -1,3 +1,7 @@
+//Given n non-negative integers representing an elevation map where the width 
+//of each bar is 1, compute how much water it can trap after raining.
+
+
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -70,15 +74,8 @@ void solve(vi vec)
     {
         count += max(left[i], right[i]) - vec[i];
     }
-
-
+    
     cout << count << " " << endl;
-
-    // forT(vec.size())cout << left[i] << " ";
-    // cout << endl;
-    // forT(vec.size())cout << right[i] << " ";
-
-
 }
 
 
@@ -106,7 +103,6 @@ int main() {
         vec.pb(no);
     }
 
-    // sort(vec.begin(), vec.end());
     solve(vec);
 
 
