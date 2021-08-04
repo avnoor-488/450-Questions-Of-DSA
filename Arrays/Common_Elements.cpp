@@ -4,22 +4,21 @@ using namespace std;
 #define mp make_pair
 #define pb push_back
 #define fi first
+#define sec second
 #define forT(t) for(int i=0;i<t;i++)
 #define forN(n) for(int j=0;j<n;j++)
 #define MOD 1000000007
-#define num 4e6 + 5
-
 
 
 typedef pair<int, int> pii;
 typedef vector<string> vs;
 typedef set<int> seti;
-typedef long long int ll;
+typedef long long ll;
 typedef vector<int> vi;
 typedef vector<vector<int>> vv;
 
 
-void fastscan( ll &number)
+void fastscan( int &number)
 {
     bool negative = false;
     register int c;
@@ -42,45 +41,37 @@ void fastscan( ll &number)
         number *= -1;
 }
 
-ll gcd (ll a, ll b)
+vi solve(vi a, vi b, vi c)
 {
-    if (b == 0)
-        return a;
+    vector<int>output;
+    int n1 = a.size();
+    int n2 = b.size();
+    int n3 = c.size();
+    unordered_set <int> uset, uset2, uset3;
+    
+    for (int i = 0; i < n1; i++) {
+        uset.insert(a[i]);
+    }
+    for (int i = 0; i < n2; i++) {
+        uset2.insert(b[i]);
+    }
 
-    return gcd(b, a % b);
+    for (int i = 0; i < n3; i++) {
+        if (uset.find(c[i]) != uset.end() && uset2.find(c[i]) != uset.end()) {
+
+            if (uset3.find(c[i]) == uset3.end())
+                output.push_back(c[i]);
+            uset3.insert(c[i]);
+        }
+
+
+    }
+    return output;
 }
 
-ll dp[100010][110][2];
-ll arr[100010];
-
-void solve(vi vec1, vi vec2, vi vec3)
-{
-    map<int, int>mp;
-
-    forT(vec1.size())
-    {
-        mp[vec1[i]]++;
-    }
-
-    forT(vec2.size())
-    {
-        mp[vec2[i]]++;
-    }
 
 
-    forT(vec3.size())
-    {
-        mp[vec3[i]]++;
-    }
 
-    for (auto it : mp)
-    {
-        if (it.second > 1)cout<<it.first <<" ";
-        else continue;
-    }
-
-
-}
 
 int main() {
 
@@ -91,38 +82,36 @@ int main() {
 
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
-    int n, m, l;
-    cin >> n;
 
-    vi vec1, vec2, vec3;
-    forT(n)
+    int n1, n2, n3 ;
+    cin >> n1 >> n2 >> n3;
+    vi a, b, c;
+    forT(n1)
     {
-        int no;
-        cin >> no;
-        vec1.pb(no);
+        int x;
+        cin >> x ;
+        a.pb(x);
     }
 
-    cin >> m;
-    forT(m)
+    forT(n2)
     {
-        int no;
-        cin >> no;
-        vec2.pb(no);
+        int x;
+        cin >> x ;
+        b.pb(x);
     }
 
-    cin >> l;
-    forT(l)
+    forT(n3)
     {
-        int no;
-        cin >> no;
-        vec3.pb(no);
+        int x;
+        cin >> x ;
+        c.pb(x);
     }
-    solve(vec1, vec2, vec3);
 
-
+    vi output = solve(a, b, c);
     return 0;
 }
 
+
+
+
 // coded with the ❤️ Avnoor
-
-
