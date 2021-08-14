@@ -1,14 +1,25 @@
+// Given a boolean 2D array of n x m dimensions where each row is sorted. 
+// Find the 0-based index of the first row that has the maximum number of 1's.
+
+// sample input:-
+
+// 3 9
+// 0 0 0 1 1 1 1 1 1
+// 0 0 0 0 1 1 1 1 1
+// 0 0 0 0 1 1 1 1 1
+
+// sample output:- 0
+
 #include <bits/stdc++.h>
 using namespace std;
 
-#define mp make_pair
+// #define mp make_pair
 #define pb push_back
 #define fi first
+#define sec second
 #define forT(t) for(int i=0;i<t;i++)
 #define forN(n) for(int j=0;j<n;j++)
 #define MOD 1000000007
-#define num 4e6 + 5
-
 
 
 typedef pair<int, int> pii;
@@ -19,7 +30,7 @@ typedef vector<int> vi;
 typedef vector<vector<int>> vv;
 
 
-void fastscan( ll &number)
+void fastscan( int &number)
 {
     bool negative = false;
     register int c;
@@ -42,58 +53,31 @@ void fastscan( ll &number)
         number *= -1;
 }
 
-ll gcd (ll a, ll b)
+void solve(vector<vector<int>>vec, int n, int m)
 {
-    if (b == 0)
-        return a;
 
-    return gcd(b, a % b);
-}
-
-ll dp[100010][110][2];
-ll arr[100010];
-
-int solve(vector<vector<int> > arr, int row, int col)
-{
-    map<int, int>mp;
-    int sCol = 0, ans;
-    // vector<int> output[row] = {0};
-    for (int i = 0; i < row; i++)
+    int currMax = 0, overallMax = 0, ans = 0;
+    for (int i = 0; i < n; i++)
     {
-        for (int j = 0; j < col; j++)
+        for (int j = 0; j < m; j++)
         {
-            if (arr[i][j] == 1)
-            {
-                mp[i] += 1;
-            }
-            else continue;
+            if (vec[i][j] == 1)currMax++;
+            // cout << currMax << " " << i << endl;
         }
-        sCol++;
+
+        if (currMax > overallMax)
+        {
+            overallMax = currMax;
+
+            ans = i;
+        }
+        currMax = 0;
+        cout << endl;
     }
 
-
-
-    // ans = distance(output.begin(), max_element(output.begin(), output.end()));
-
-    map<int, int>::iterator itr = mp.begin();
-    int maxRow = itr->second;
-    ans = itr->first;
-    for (auto it : mp)
-    {
-        if (it.second > maxRow)
-        {
-            // cout << it.second << " ";
-            ans = it.first;
-        }
-        else continue;
-
-        // cout << endl;
-    }
-
-    return ans;
+    if (overallMax == 0)ans = -1;
+    cout << ans << endl;
 }
-
-
 
 
 int main() {
@@ -105,28 +89,22 @@ int main() {
 
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
-    int row, col;
-    cin >> row >> col;
-    vector<vector<int> > matrix(row);
-    forT(row)
-    {
-        matrix[i].assign(col, 0);
-        forN(col)
-        {
+    int n, m;
+    cin >> n >> m;
+    vector< vector<int> > arr(n, vector<int>(m));
 
-            cin >> matrix[i][j];
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = 0; j < m; j++)
+        {
+            cin >> arr[i][j];
         }
     }
 
-    int key;
-    cin >> key;
 
-
-    cout << solve(matrix, row, col);
-
-    return 0;
+    solve(arr, n, m);
 }
 
+
+
 // coded with the ❤️ Avnoor
-
-
