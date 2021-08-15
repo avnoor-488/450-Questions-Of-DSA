@@ -36,8 +36,6 @@ If you are looking for a public repository to contribute then you are at the rig
 
 -> In case the solution already exist for the problem, make another file for it marking the number of the solution.
 
--> For naming convention please put the problem name as was in contest and name the commit message as the contest name with year.
-
 -> Please put a block comment of the question in your solution.
 
 -> Please refrain from adding plagiarised code. In case you are using someone's code please add credit or reference.
